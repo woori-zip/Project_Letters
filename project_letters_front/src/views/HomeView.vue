@@ -1,18 +1,31 @@
+// HomeView.vue
 <template>
-  <div class="home">
+<div class="home">
     <h1>📬</h1>
-    <Login />
+    <div v-if="isAuthenticated">
+      <p>Welcome!</p>
+      <button @click="logout">Logout</button>
+    </div>
+    <div v-else>
+      <Login />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapGetters, mapActions } from 'vuex'
 import Login from '../components/LoginView.vue'
 
 export default {
   name: 'HomeView',
   components: {
     Login
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated'])
+  },
+  methods: {
+    ...mapActions(['logout'])
   }
 }
 </script>

@@ -46,7 +46,7 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SubscriptionStatus subscriptionStatus = SubscriptionStatus.NONE;
+    private SubscriptionStatus subscriptionStatus = SubscriptionStatus.none;
 
     @Column(unique = true)
     private String verificationToken;
@@ -72,10 +72,10 @@ public class User {
     }
 
     public enum Gender {
-        MALE, FEMALE, OTHER
+        male, female, other
     }
 
     public enum SubscriptionStatus {
-        NONE, ONE_TIME, RECURRING
+        none, one_time, recurring
     }
 }
