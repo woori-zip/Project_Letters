@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class UserDTO {
+    private String id;
+    private String externalId;
     private String email;
     private String password;
     private String confirmPassword;  // 비밀번호 확인을 위한 필드

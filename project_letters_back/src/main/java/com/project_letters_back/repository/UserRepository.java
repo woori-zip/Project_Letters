@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<User, byte[]> {
     Optional<User> findByEmail(String email);
+    User findByExternalId(String externalId);
     // 추가적인 쿼리 메서드 정의 가능
 }

@@ -25,6 +25,9 @@ public class User {
     @Column(columnDefinition = "CHAR(36)", updatable = false, nullable = false)
     private String id;
 
+    @Column(unique = true)
+    private String externalId;
+
     @Column(nullable = false, unique = true)
     private String email;
 

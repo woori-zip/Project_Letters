@@ -14,12 +14,15 @@
         <input type="email" v-model="email" placeholder="Email" required>
       </div>
       <div class="form-group">
-        <input type="password" v-model="password" placeholder="Password" required>
+        <input type="password" v-model="password" placeholder="password" required>
       </div>
       <p>
         New here? <router-link to="/register">Sign up here!</router-link>
       </p>
-      <button type="submit">Login</button>
+      <div class="btn-container">
+        <button type="submit">Login</button>
+        <img src="../assets/kakao_login_medium_wide.png" :href="kakaoLoginUrl">
+      </div>
     </form>
 
   </div>
@@ -36,8 +39,15 @@ export default {
       email: '',
       password: '',
       errorMessage: '',
-      successMessage: ''
+      successMessage: '',
+      kakaoLoginUrl: ''
     }
+  },
+  created () {
+    // 카카오 로그인 URL 설정
+    const clientId = 'fb67f53f9623c671f4ca405959464c76'
+    const redirectUri = 'http://localhost:9095/auth/kakao/callback'
+    this.kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=profile_nickname`
   },
   methods: {
     ...mapActions(['login']),
@@ -45,8 +55,7 @@ export default {
       this.errorMessage = ''
       try {
         await this.login({ email: this.email, password: this.password })
-        // this.$router.push('/')
-        location.reload()
+        this.$router.push('/') // 로그인 성공 시 홈 페이지로 리다이렉트
       } catch (error) {
         if (error.response) {
           this.errorMessage = error.response.data
@@ -58,3 +67,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn-container {
+  width: 60%;
+  margin:auto;
+}
+.btn-container button {
+  width: 100%;
+}
+
+.btn-container img {
+  width: 100%;
+  margin: 5px auto 0 auto;
+}
+</style>

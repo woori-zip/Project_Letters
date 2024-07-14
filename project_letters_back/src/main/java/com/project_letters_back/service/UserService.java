@@ -49,4 +49,8 @@ public class UserService {
             throw e; // 예외를 다시 던짐
         }
     }
+
+    public User findByExternalId(String externalId) {
+        return userRepository.findByExternalId(externalId);
+    }
 }
